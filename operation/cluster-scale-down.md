@@ -10,30 +10,30 @@
 
 1. 将节点从集群路由策略中排除. 下面例子中使用 _name 属性下线指定的节点. 还有 _ip, _host 属性. 具体参考[Cluster-Shards-Routing-Filter](../Modules/cluster.md)
 
-  ```shell
-  curl -X PUT "localhost:9200/_cluster/settings" -H 'Content-Type: application/json' -d'
-  {
-    "transient" : {
-      "cluster.routing.allocation.exclude._name" : "node3,node5"
+    ```shell
+    curl -X PUT "localhost:9200/_cluster/settings" -H 'Content-Type: application/json' -d'
+    {
+      "transient" : {
+        "cluster.routing.allocation.exclude._name" : "node3,node5"
+      }
     }
-  }
-  '
-  ```
+    '
+    ```
 
 2. 查看集群状态
 3. 等待分片从被排除节点迁移到其他节点上.
 4. 关闭节点服务
 5. 取消节点禁用策略
 
-  ```shell
-  curl -X PUT "localhost:9200/_cluster/settings" -H 'Content-Type: application/json' -d'
-  {
-    "transient" : {
-      "cluster.routing.allocation.exclude._name" : null
+    ```shell
+    curl -X PUT "localhost:9200/_cluster/settings" -H 'Content-Type: application/json' -d'
+    {
+      "transient" : {
+        "cluster.routing.allocation.exclude._name" : null
+      }
     }
-  }
-  '
-  ```
+    '
+    ```
 
 ### master 类型节点
 

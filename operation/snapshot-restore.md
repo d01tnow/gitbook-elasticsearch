@@ -19,16 +19,18 @@ elasticsearch v5.6
 
 * 使用共享文件系统的例子. settings 部分是和具体的仓库 type 相关的.
 
-  ``` shell
-  ## 注册一个仓库
-  curl -XPUT 'http://localhost:9200/_snapshot/repo_name' -H 'Content-Type: application/json' -d'
-  {
-    "type": "fs",
-    "settings": {
-      "location": "/elastic/backup/repo_name"
-    }
-  }'
-  ```
+    ``` shell
+    ## 注册一个仓库
+    curl -XPUT 'http://localhost:9200/_snapshot/repo_name' -H 'Content-Type: application/json' -d'
+    {
+      "type": "fs",
+      "settings": {
+        "location": "/elastic/backup/repo_name"
+      }
+    }'
+    ```
+
+  **注意**: 如果出现错误"cannot create blob store", 可能是 "/elastic/backup" 无写入权限
 
   | 字段 | 含义 | 是否必需 | 备注 |
   | ---- | ---- | ------- | ---- |
