@@ -14,7 +14,7 @@
   ```shell
   curl -X PUT "localhost:9200/_cluster/settings" -H 'Content-Type: application/json' -d'
   {
-    "persistent": {
+    "transient": {
       "cluster.routing.allocation.enable": "none"
     }
   }
@@ -29,13 +29,13 @@
 8. 修改"备份目录所有者为 1000:1000": sudo chown -R 1000:1000 /path/to/backup
 9. 移动节点数据中的 _state 目录和 node.lock 文件, 到节点数据目录下的 bak. sudo mkdir /path/to/es-data/nodes/0/bak && sudo mv /path/to/es-data/nodes/0/node.lock /path/to/es-data/nodes/0/bak && sudo mv /path/to/es-data/nodes/0/_state /path/to/es-data/nodes/0/bak
 10. 启动主节点, 候选主节点和其他节点
-11. 查看集群状态. 在集群状态为 yellow 后再启用分片分配功能
+11. 查看集群状态. 在集群状态为 green 后再启用分片分配功能
 12. 启用分片分配功能
 
   ```shell
   curl -X PUT "localhost:9200/_cluster/settings" -H 'Content-Type: application/json' -d'
   {
-    "persistent": {
+    "transient": {
       "cluster.routing.allocation.enable": null
     }
   }
