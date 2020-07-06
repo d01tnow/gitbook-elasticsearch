@@ -133,15 +133,21 @@ curl -X DELETE "localhost:9200/_snapshot/repo_name/snapshot_1"
 curl -X POST "localhost:9200/_snapshot/repo_name/snapshot_1/_restore"
 ```
 
-可以指定恢复的索引名称, 同时可以重命名索引.
+可以指定恢复的索引名称, 同时可以重命名索引, 改变设置. rename_pattern 是符合 Java 正则表达的语法. 但是, 作为 application/json 格式需要转义 '\'.
 
 ```shell
 curl -X POST "localhost:9200/_snapshot/repo_name/snapshot_1/_restore" -H 'Content-Type: application/json' -d'
 {
-  "indices": "index_1,index_2",
+  "indices": "index_2018.01.01,index_2018.01.02",
+  "index_settings": {
+    "index.number_of_replicas": 0
+  },
+  "ignore_index_settings": [
+    "index.refresh_interval"
+  ],
   "ignore_unavailable": true,
   "include_global_state": true,
-  "rename_pattern": "index_(.+)",
+  "rename_pattern": "index_(\\d{4}.\\d{2}.\\d{2})",
   "rename_replacement": "restored_index_$1"
 }
 '
