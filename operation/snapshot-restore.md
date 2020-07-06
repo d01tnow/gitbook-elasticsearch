@@ -1,6 +1,6 @@
 # Snapshot And Restore
 
-elasticsearch v5.6
+elasticsearch v6.4 验证通过
 
 ## Snapshot
 
