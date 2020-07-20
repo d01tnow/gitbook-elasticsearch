@@ -32,21 +32,26 @@ elasticsearch v6.4 验证通过
 
   **注意**: 如果出现错误"cannot create blob store", 可能是 "/elastic/backup" 无写入权限
 
-  | 字段 | 含义 | 是否必需 | 备注 |
-  | ---- | ---- | ------- | ---- |
-  repo_name | 仓库名称 | 必需 |
-  type | 仓库的文件系统类型 | 必需 | fs: 共享的文件系统. ES 还支持 [S3][1], [HDFS][2], [azure][3], [gcs][4]
-  settings | 文件系统类型相关的设置 | 必需 |
+  | 字段      | 含义                   | 是否必需 | 备注                                                         |
+  | --------- | ---------------------- | -------- | ------------------------------------------------------------ |
+  | repo_name | repo_name              | 必需     |                                                              |
+  | type      | 仓库的文件系统类型     | 必需     | fs: 共享的文件系统. ES 还支持 [S3][1], [HDFS][2], [azure][3], [gcs][4] |
+  | settings  | 文件系统类型相关的设置 | 必需     |                                                              |
 
+  
+  
   支持的设置项有:
+  
+  
+  
   | 字段 | 含义 | 是否必需 | 备注 |
-  | ---- | ---- | ------- | ---- |
-  location | 指定快照存储位置. | 必需 | 所有的 master 和 data 节点都必需在 elasticsearch.yml 配置过相同的 path.repo: ["/elastic/backup", "/mount/backups"]. 服务要有权限访问这些已挂载的目录.
-  compress | 是否压缩元数据文件(index mapping 和 settings), 数据文件不会压缩 | 可选 | 默认: true
-  max_restore_bytes_per_sec | 单节点每秒恢复的最大字节数 | 可选 | 默认: 40mb
-  max_snapshot_bytes_per_sec | 单节点每秒快照的最大字节数 | 可选 | 默认: 40mb
-  readonly | 使仓库只读 | 可选 | 默认: false
-  chunk_size | 快照过程中大文件可能会被拆分成多个 chunk. 设置每个 chunk 的大小. 需指定单位. 比如: 1g, 10m, 5k | 可选 | 默认: null . 表示无限制.
+  | ---- | ---- | -------- | ---- |
+  | location | 指定快照存储位置. | 必需 | 所有的 master 和 data 节点都必需在 elasticsearch.yml 配置过相同的 path.repo: ["/elastic/backup", "/mount/backups"]. 服务要有权限访问这些已挂载的目录. |
+  |compress | 是否压缩元数据文件(index mapping 和 settings), 数据文件不会压缩 | 可选 | 默认: true|
+  |max_restore_bytes_per_sec | 单节点每秒恢复的最大字节数 | 可选 | 默认: 40mb|
+  |max_snapshot_bytes_per_sec | 单节点每秒快照的最大字节数 | 可选 | 默认: 40mb|
+  |readonly | 使仓库只读 | 可选 | 默认: false|
+  |chunk_size | 快照过程中大文件可能会被拆分成多个 chunk. 设置每个 chunk 的大小. 需指定单位. 比如: 1g, 10m, 5k | 可选 | 默认: null . 表示无限制.|
 
 ### 删除已注册仓库
 
